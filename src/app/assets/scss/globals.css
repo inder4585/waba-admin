@@ -1,0 +1,233 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* -----------------------------------
+   Tailwind v4 Theme Tokens
+----------------------------------- */
+@theme {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-card: hsl(var(--card));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+}
+
+/* -----------------------------------
+   Base Layer
+----------------------------------- */
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+
+    --primary: 250 92% 70%;
+    --primary-foreground: 240 100% 98%;
+
+    --secondary: 214.3 31.8% 91.4%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --accent: 214.3 31.8% 91.4%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 85.7% 97.3;
+
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 47.4% 11.2%;
+    --foreground: 210 40% 98%;
+    --border: 215.3 25% 26.7%;
+    --input: 217.2 32.6% 17.5%;
+    --primary: 254 86% 58%;
+    --ring: 263.4 70% 50.4%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    background-color: #eef1f9;
+    @apply text-foreground text-sm;
+  }
+
+  .dark body {
+    background-color: hsl(var(--background));
+  }
+}
+
+/* -----------------------------------
+   Layout / Utilities
+----------------------------------- */
+.has-sticky-header::after {
+  position: absolute;
+  z-index: -10;
+  content: "";
+  backdrop-filter: blur(12px);
+  background: linear-gradient(180deg,
+      rgba(var(--v-theme-background), 70%) 44%,
+      rgba(var(--v-theme-background), 43%) 73%,
+      rgba(var(--v-theme-background), 0%));
+  block-size: 5.5rem;
+  inset: -1.5rem 0 auto 0;
+  mask: linear-gradient(black, black 18%, transparent 100%);
+}
+
+.page-min-height {
+  min-height: calc(var(--vh, 1vh) * 100 - 117px);
+}
+
+.page-min-height-semibox {
+  min-height: calc(var(--vh, 1vh) * 100 - 200px);
+}
+
+.page-min-height-horizontal {
+  min-height: calc(var(--vh, 1vh) * 100 - 170px);
+}
+
+.app-height {
+  height: calc(var(--vh, 1vh) * 100 - 11.1rem) !important;
+}
+
+@media (max-width: 768px) {
+  .app-height {
+    height: calc(var(--vh, 1vh) * 100 - 10.5rem) !important;
+  }
+}
+
+/* -----------------------------------
+   Collapsible
+----------------------------------- */
+.CollapsibleContent {
+  overflow: hidden;
+}
+
+.CollapsibleContent[data-state="open"] {
+  animation: slideDown 300ms ease-out;
+}
+
+.CollapsibleContent[data-state="closed"] {
+  animation: slideUp 300ms ease-out;
+}
+
+/* -----------------------------------
+   Input Groups
+----------------------------------- */
+.input-group :not(:first-child) input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.input-group.merged :not(:first-child) input {
+  border-left-width: 0;
+  padding-left: 0;
+}
+
+.input-group :not(:last-child) input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group.merged :not(:last-child) input {
+  border-right-width: 0;
+  padding-right: 0;
+}
+
+/* -----------------------------------
+   CKEditor
+----------------------------------- */
+.ck-editor__editable {
+  min-height: 245px !important;
+}
+
+/* -----------------------------------
+   Avatar Hover (NO @apply variants)
+----------------------------------- */
+.avatarGroup>span {
+  transition: transform 0.2s ease;
+}
+
+.avatarGroup>span:hover {
+  transform: translateY(-0.25rem);
+  position: relative;
+  z-index: 10;
+}
+
+/* -----------------------------------
+   Auth
+----------------------------------- */
+.loginwrapper {
+  min-height: calc(var(--vh, 1vh) * 100);
+  flex-basis: 100%;
+}
+
+.loginwrapper .lg-inner-column {
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+/* -----------------------------------
+   Animations
+----------------------------------- */
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+
+  to {
+    background-position: 0 0;
+  }
+}
+
+.animate-stripes {
+  animation: progress-bar-stripes 1s linear infinite;
+}
+
+/* -----------------------------------
+   Leaflet Fix
+----------------------------------- */
+.dash-tail-app .leaflet-control,
+.dash-tail-app .leaflet-container {
+  z-index: 0 !important;
+  position: relative;
+}
