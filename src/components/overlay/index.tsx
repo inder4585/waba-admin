@@ -4,7 +4,12 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Sheet, SheetContent, SheetFooter } from '@/components/ui/sheet';
+import {
+  Sheet,
+  SheetContent,
+  SheetFooter,
+  SheetTitle,
+} from '@/components/ui/sheet';
 import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { PlusCircle, Trash2 } from 'lucide-react';
@@ -131,22 +136,17 @@ export default function Overlay({
       open={open}
       onOpenChange={setOpen}
     >
+      <SheetTitle>{selectedNode?.data?.type}</SheetTitle>
       <SheetContent
         side="right"
-        className="w-full max-w-2xl overflow-y-auto"
+        className="w-full max-w-2xl flex h-full flex-col "
       >
-        <div className="p-4 space-y-6">
+        <div className="flex-1 p-4 space-y-6 mt-5 overflow-y-auto">
           <Card className="p-4 space-y-2">
             <Label>Node Name</Label>
             <Input
               value={form.nodeName}
               onChange={(e) => setForm({ ...form, nodeName: e.target.value })}
-            />
-
-            <Label>Next Node ID</Label>
-            <Input
-              value={form.nextNode}
-              onChange={(e) => setForm({ ...form, nextNode: e.target.value })}
             />
           </Card>
 
@@ -467,7 +467,7 @@ export default function Overlay({
                   {(form.payload.buttons || []).map((b: any, i: number) => (
                     <div
                       key={i}
-                      className="p-3 border rounded-lg space-y-2 bg-gray-50 dark:bg-slate-900 dark:border-slate-800"
+                      className="p-3 border rounded-lg space-y-2 bg-gray-50"
                     >
                       <div className="flex gap-2">
                         <Input
@@ -481,7 +481,7 @@ export default function Overlay({
                           }}
                         />
                         <select
-                          className="p-2 border rounded-md text-sm bg-white dark:bg-slate-950 dark:border-slate-800"
+                          className="p-2 border rounded-md text-sm bg-white"
                           value={b.type}
                           onChange={(e) => {
                             const copy = [...form.payload.buttons];
@@ -572,7 +572,7 @@ export default function Overlay({
                   {(form.payload.cases || []).map((c: any, i: number) => (
                     <div
                       key={i}
-                      className="p-3 bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 rounded-lg space-y-3 relative group"
+                      className="p-3 bg-gray-50 border border-gray-100 rounded-lg space-y-3 relative group"
                     >
                       <div className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity">
                         <Button
@@ -593,7 +593,7 @@ export default function Overlay({
                         <div className="space-y-1">
                           <Label className="text-[10px]">Operator</Label>
                           <select
-                            className="w-full p-2 border rounded-md text-sm bg-white dark:bg-slate-950 dark:border-slate-700"
+                            className="w-full p-2 border rounded-md text-sm bg-white"
                             value={c.operator || 'eq'}
                             onChange={(e) => {
                               const copy = [...form.payload.cases];
@@ -772,7 +772,7 @@ export default function Overlay({
               <div className="space-y-2">
                 <Label>Method</Label>
                 <select
-                  className="w-full p-2 border rounded-md text-sm bg-white dark:bg-slate-950 dark:border-slate-800"
+                  className="w-full p-2 border rounded-md text-sm bg-white"
                   value={form.payload.method || 'POST'}
                   onChange={(e) => updatePayload('method', e.target.value)}
                 >
@@ -793,16 +793,12 @@ export default function Overlay({
                       : form.payload.payload || ''
                   }
                   onChange={(e) => {
-                    // Try to parse JSON if possible, otherwise store as string
-                    // But for user flexibility, maybe just keep as string and parse on execution?
-                    // User request implies "text area", so treating as string in UI is best.
-                    // We will store it as string in form state for now to allow invalid JSON while typing.
                     updatePayload('payload', e.target.value);
                   }}
                 />
                 <p className="text-[10px] text-gray-500">
                   You can use dynamic variables like{' '}
-                  <code className="bg-gray-100 dark:bg-slate-800 px-1 rounded">
+                  <code className="bg-gray-100 px-1 rounded">
                     {'{{variable_name}}'}
                   </code>
                 </p>
@@ -850,8 +846,6 @@ export default function Overlay({
                             longitude: position.coords.longitude.toString(),
                           },
                         }));
-                        // Also can simulate address fetching if we had a reverse geocoding API,
-                        // but for now just updating lat/long is what was asked.
                       },
                       (error) => {
                         console.error('Error getting location', error);
@@ -911,7 +905,7 @@ export default function Overlay({
                 />
                 <p className="text-[10px] text-gray-500 mt-1">
                   Supports{' '}
-                  <code className="bg-gray-100 dark:bg-slate-800 px-1 rounded">
+                  <code className="bg-gray-100 px-1 rounded">
                     {'{{variables}}'}
                   </code>
                 </p>
@@ -959,7 +953,7 @@ export default function Overlay({
                   {form.payload?.cards?.map((card: any, index: number) => (
                     <Card
                       key={index}
-                      className="p-3 border border-gray-200 dark:border-slate-700 bg-gray-50 dark:bg-slate-900/50 relative"
+                      className="p-3 border border-gray-200 bg-gray-50 relative"
                     >
                       <button
                         className="absolute top-2 right-2 text-red-500 hover:text-red-700"
@@ -1139,7 +1133,7 @@ export default function Overlay({
               {(form.payload.contacts || []).map((contact: any, ci: number) => (
                 <Card
                   key={ci}
-                  className="p-3 border border-teal-100 dark:border-teal-900 space-y-4"
+                  className="p-3 border border-teal-100 space-y-4"
                 >
                   <div className="flex justify-between items-center border-b pb-2">
                     <span className="font-semibold text-sm">
@@ -1538,26 +1532,24 @@ export default function Overlay({
               ))}
             </Card>
           )}
-
-          <SheetFooter className="flex justify-between gap-2 mt-8 border-t pt-6">
-            <div className="flex gap-2">
-              <Button
-                variant="secondary"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button onClick={saveNode}>Save Changes</Button>
-            </div>
+        </div>
+        <SheetFooter className="sticky bottom-0 z-10 bg-white border-t p-4">
+          <div className="flex gap-2">
             <Button
-              variant="destructive"
+              variant="secondary"
+              onClick={() => setOpen(false)}
+            >
+              Cancel
+            </Button>
+            <Button onClick={saveNode}>Save Changes</Button>
+            <Button
               onClick={handleDelete}
-              className="flex items-center gap-2 absolute bottom-4 right-3"
+              className="flex ml-auto items-center gap-2  bg-red-600 hover:bg-red-900"
             >
               <Trash2 className="h-4 w-4" />
             </Button>
-          </SheetFooter>
-        </div>
+          </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

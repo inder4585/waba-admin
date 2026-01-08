@@ -21,7 +21,6 @@ import {
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
-// Import new node components
 import FlowStartNode from '../node/FlowStartNode';
 import TextNode from '../node/TextNode';
 import AskQuestionNode from '../node/AskQuestionNode';
@@ -41,10 +40,8 @@ import ContactsNode from '../node/ContactsNode';
 import CarouselNode from '../node/CarouselNode';
 
 import { dataItems } from '../Sidebar/dataItems';
-import { v4 as uuidv4 } from 'uuid'; // Assuming uuid is installed or use util
-import { toast } from 'sonner';
+import { v4 as uuidv4 } from 'uuid';
 
-// Define nodeTypes outside component to prevent re-creation
 const nodeTypes = {
   flowStart: FlowStartNode,
   text: TextNode,
@@ -71,15 +68,12 @@ import Topbar from '../Topbar/Topbar';
 import { BackgroundVariant } from '@xyflow/react';
 import { MdAdd } from 'react-icons/md';
 
-// ... (imports remain same)
-
 import { useParams } from 'next/navigation';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { flowBuilderService } from '@/services/flowBuilderService';
-// ... existing imports
+import toast from 'react-hot-toast';
 
 const FlowContent: React.FC = () => {
-  // ... existing hooks
   const params = useParams();
   const id = params?.id as string;
   const [nodes, setNodes] = useNodesState<Node>([]);
@@ -96,6 +90,7 @@ const FlowContent: React.FC = () => {
     queryFn: () => flowBuilderService.getById(id!),
     enabled: !!id,
   });
+
   React.useEffect(() => {
     if (flowData && flowData) {
       const loadedNodes =
@@ -246,7 +241,7 @@ const FlowContent: React.FC = () => {
     const newNode: Node = {
       id,
       type,
-      position: { x: 0, y: 0 }, // Should ideally use flow center
+      position: { x: 0, y: 0 },
       data: (dataItems as any)[type] || {},
     };
     setNodes((nds) => nds.concat(newNode));
@@ -257,7 +252,10 @@ const FlowContent: React.FC = () => {
       className="w-full h-full flex flex-col"
       ref={reactFlowWrapper}
     >
-      <Topbar onSave={handleSave} />
+      <Topbar
+        onSave={handleSave}
+        name={flowData?.name ?? ''}
+      />
 
       <div className="flex-1 w-full h-full relative bg-slate-50">
         <ReactFlow
@@ -276,7 +274,7 @@ const FlowContent: React.FC = () => {
           className="bg-slate-50 transition-colors duration-300"
         >
           <MiniMap
-            className="dark:bg-slate-800 dark:border-slate-700 m-4 border rounded-xl shadow-lg"
+            className=" m-4 border rounded-xl shadow-lg"
             nodeColor={(n) => {
               if (n.type === 'flowStart') return '#10b981';
               if (n.type === 'end') return '#ef4444';
@@ -284,7 +282,7 @@ const FlowContent: React.FC = () => {
             }}
             maskColor="rgba(241, 245, 249, 0.7)"
           />
-          <Controls className="dark:bg-slate-800 dark:border-slate-700 dark:text-white m-4 border-none shadow-lg rounded-xl overflow-hidden" />
+          <Controls className="m-4 border-none shadow-lg rounded-xl overflow-hidden" />
           <Background
             color="#e2e8f0"
             gap={24}

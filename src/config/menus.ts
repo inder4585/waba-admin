@@ -5,7 +5,8 @@ import {
   Messages,
   Files,
   Graph,
-} from "@/components/svg";
+  Stacks2,
+} from '@/components/svg';
 
 export type MenuItem = {
   title: string;
@@ -25,78 +26,83 @@ export const menusConfig: {
 } = {
   mainNav: [
     {
-      title: "Dashboard",
+      title: 'Dashboard',
       icon: DashBoard,
-      href: "/",
+      href: '/',
     },
   ],
   sidebarNav: {
     modern: [
       {
-        title: "Dashboard",
+        title: 'Dashboard',
         icon: DashBoard,
-        href: "/",
+        href: '/',
       },
       {
-        title: "Flow Builder",
+        title: 'Flow Builder',
         icon: Graph,
-        href: "/waba-numbers",
+        href: '/flow-builder',
       },
       {
-        title: "WABA Numbers",
+        title: 'WABA Numbers',
         icon: Device,
-        href: "/waba-numbers",
+        href: '/waba-numbers',
       },
       {
-        title: "WABA Groups",
+        title: 'WABA Groups',
         icon: Users,
-        href: "/waba-groups",
+        href: '/waba-groups',
       },
       {
-        title: "Inbox",
+        title: 'Inbox',
         icon: Messages,
-        href: "/inbox",
+        href: '/inbox',
       },
       {
-        title: "Templates",
+        title: 'Templates',
         icon: Files,
-        href: "/templates",
+        href: '/templates',
       },
     ],
     classic: [
       {
         isHeader: true,
-        title: "menu",
+        title: 'menu',
       },
       {
-        title: "Dashboard",
+        title: 'Dashboard',
         icon: DashBoard,
-        href: "/",
+        href: '/',
       },
       {
-        title: "Flow Builder",
+        title: 'Flow Builder',
         icon: Graph,
-        href: "/waba-numbers",
+        href: '/flow-builder',
       },
       {
-        title: "WABA Numbers",
+        title: 'WABA Numbers',
         icon: Device,
-        href: "/waba-numbers",
+        href: '/waba-numbers',
       },
       {
-        title: "WABA Groups",
+        title: 'WABA Groups',
         icon: Users,
-        href: "/waba-groups",
+        href: '/waba-groups',
       },
       {
-        title: "Inbox",
+        title: 'Inbox',
         icon: Messages,
-        href: "/inbox",
+        href: '/inbox',
       },
       {
-        title: "Templates",
+        title: 'Templates',
         icon: Files,
-        href: "/templates",
+        href: '/templates',
+      },
+      {
+        title: 'Campaigns',
+        icon: Stacks2,
+        href: '/campaigns-manager',
       },
     ],
   },

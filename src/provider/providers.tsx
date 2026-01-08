@@ -24,7 +24,6 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       <ThemeProvider
         attribute="class"
         enableSystem={false}
-        defaultTheme="light"
       >
         <div className={cn('h-full  ')}>{children}</div>
         <Toaster />

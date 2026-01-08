@@ -1,4 +1,5 @@
 import { api } from '@/lib/api';
+import { API_CONTENT } from '@/utils/api_content';
 
 export interface CreateWabaNumberDto {
   accessToken: string;
@@ -27,14 +28,15 @@ export interface WabaNumber {
 }
 
 export const wabaNumberService = {
-  getAll: async () => {
-    // Assuming the same sortBy param pattern
-    const response = await api.get('/api/waba-number?sortBy=createdAt');
+  getAll: async (params?: { page: number; limit: number; userId: string }) => {
+    const endpoint = API_CONTENT.api.waba_number || '/waba-number';
+    const response = await api.get(`${endpoint}?sortBy=createdAt`, { params });
     return response.data;
   },
 
   create: async (data: CreateWabaNumberDto) => {
-    const response = await api.post('/api/waba-number', data);
+    const endpoint = API_CONTENT.api.waba_number || '/waba-number';
+    const response = await api.post(endpoint, data);
     return response.data;
   },
 };

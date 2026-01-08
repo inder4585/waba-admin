@@ -1,13 +1,13 @@
-"use client";
-import { Button } from "@/components/ui/button";
-import { Expand } from "@/components/svg";
+'use client';
+import { Button } from '@/components/ui/button';
+import { Expand } from '@/components/svg';
 import {
   Tooltip,
   TooltipArrow,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from '@/components/ui/tooltip';
 
 function FullScreenToggle() {
   const toggleFullScreen = () => {
@@ -38,7 +38,6 @@ function FullScreenToggle() {
   };
 
   return (
-
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
@@ -46,9 +45,9 @@ function FullScreenToggle() {
             onClick={toggleFullScreen}
             variant="ghost"
             size="icon"
-            className="relative md:h-9 md:w-9 h-8 w-8 hover:bg-default-100 dark:hover:bg-default-200
-         data-[state=open]:bg-default-100  dark:data-[state=open]:bg-default-200
-           hover:text-primary text-default-500 dark:text-default-800  rounded-full "
+            className="relative md:h-9 md:w-9 h-8 w-8 hover:bg-default-100
+         data-[state=open]:bg-default-100
+           hover:text-primary text-default-500  rounded-full "
           >
             <Expand className="h-5 w-5" />
           </Button>
@@ -58,7 +57,7 @@ function FullScreenToggle() {
           <p>Full Screen</p>
         </TooltipContent>
       </Tooltip>
-    </TooltipProvider >
+    </TooltipProvider>
   );
 }
 

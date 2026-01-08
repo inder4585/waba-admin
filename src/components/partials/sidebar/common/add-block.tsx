@@ -1,35 +1,39 @@
-"use client";
-import React, { useState } from "react";
-import { cn } from "@/lib/utils";
+'use client';
+import React, { useState } from 'react';
+import { cn } from '@/lib/utils';
 
-import { X } from "lucide-react";
-import { Icon } from "@iconify/react";
-import Image from "next/image";
-import thumbnail from "@/assets/images/all-img/thumbnail.png";
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { X } from 'lucide-react';
+import { Icon } from '@iconify/react';
+import Image from 'next/image';
+import thumbnail from '@/assets/images/all-img/thumbnail.png';
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 const AddBlock = ({
   className,
   image = thumbnail,
-  title = "Storage capacity",
-  desc = " Out of your total storage on Premium Plan, you have used up 40%.",
+  title = 'Storage capacity',
+  desc = ' Out of your total storage on Premium Plan, you have used up 40%.',
 }) => {
   const [openVideo, setOpenVideo] = useState(false);
   return (
     <>
       <div
         className={cn(
-          "bg-primary dark:bg-default-400 text-primary-foreground pt-5 pb-4 px-4  rounded  m-3 hidden xl:block",
+          'bg-primary text-primary-foreground pt-5 pb-4 px-4  rounded  m-3 hidden xl:block',
           className
         )}
       >
-        <div className={cn("text-base font-semibold text-primary-foreground")}>
-          {" "}
+        <div className={cn('text-base font-semibold text-primary-foreground')}>
+          {' '}
           {title}
         </div>
-        <div className={cn(" text-sm text-primary-foreground")}>{desc}</div>
+        <div className={cn(' text-sm text-primary-foreground')}>{desc}</div>
         <div className="mt-4 relative">
-          <Image src={image} alt="footer-thumbnail" className="w-full h-full" />
+          <Image
+            src={image}
+            alt="footer-thumbnail"
+            className="w-full h-full"
+          />
           <Button
             size="icon"
             type="button"
@@ -45,11 +49,18 @@ const AddBlock = ({
         </div>
         <div className="text-sm font-semibold  text-primary-foreground flex items-center gap-2 mt-4">
           Upgrade Now
-          <Icon icon="heroicons:arrow-long-right" className="w-5 h-5" />{" "}
+          <Icon
+            icon="heroicons:arrow-long-right"
+            className="w-5 h-5"
+          />{' '}
         </div>
       </div>
       <Dialog open={openVideo}>
-        <DialogContent size="lg" className="p-0" hiddenCloseIcon>
+        <DialogContent
+          size="lg"
+          className="p-0"
+          hiddenCloseIcon
+        >
           <Button
             size="icon"
             onClick={() => setOpenVideo(false)}
@@ -64,7 +75,7 @@ const AddBlock = ({
             title="YouTube video player"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen 
+            allowFullScreen
           ></iframe>
         </DialogContent>
       </Dialog>
@@ -73,7 +84,3 @@ const AddBlock = ({
 };
 
 export default AddBlock;
-
-
-
-

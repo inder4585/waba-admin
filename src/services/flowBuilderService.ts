@@ -1,4 +1,5 @@
 import { api } from '@/lib/api';
+import { API_CONTENT } from '@/utils/api_content';
 
 export interface FlowData {
   id: string;
@@ -24,23 +25,27 @@ export interface CreateFlowDto {
 }
 
 export const flowBuilderService = {
-  getAll: async () => {
-    const response = await api.get('/api/flow-builder?sortBy=createdAt');
+  getAll: async (params?: { page?: number; limit?: number; userId?: string; groupName?: string; wabaNumber?: string }) => {
+    const endpoint = API_CONTENT.api.waba_flow_builder || '/flow-builder';
+    const response = await api.get(`${endpoint}?sortBy=createdAt`, { params });
     return response.data;
   },
 
   getById: async (id: string) => {
-    const response = await api.get(`/api/flow-builder/${id}`);
+    const endpoint = API_CONTENT.api.waba_flow_builder || '/flow-builder';
+    const response = await api.get(`${endpoint}/${id}`);
     return response.data;
   },
 
   create: async (data: CreateFlowDto) => {
-    const response = await api.post('/api/flow-builder', data);
+    const endpoint = API_CONTENT.api.waba_flow_builder || '/flow-builder';
+    const response = await api.post(endpoint, data);
     return response.data;
   },
 
   update: async (id: string, data: Partial<CreateFlowDto>) => {
-    const response = await api.patch(`/api/flow-builder/${id}`, data);
+    const endpoint = API_CONTENT.api.waba_flow_builder || '/flow-builder';
+    const response = await api.patch(`${endpoint}/${id}`, data);
     return response.data;
   },
 };

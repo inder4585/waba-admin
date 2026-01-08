@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 import { sidebarItems } from './dataItems';
 import {
   MdStart,
@@ -17,7 +18,7 @@ import {
   MdLocationPin,
   MdViewCarousel,
 } from 'react-icons/md';
-import 'simplebar'; // or "import SimpleBar from 'simplebar';" if you want to use it manually.
+import 'simplebar';
 import 'simplebar/dist/simplebar.css';
 const iconMap: any = {
   MdStart: <MdStart size={20} />,
@@ -39,6 +40,7 @@ const iconMap: any = {
 };
 
 export default function Sidebar() {
+  const router = useRouter();
   const onDragStart = (event: React.DragEvent, nodeType: string) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
     event.dataTransfer.effectAllowed = 'move';
@@ -79,8 +81,11 @@ export default function Sidebar() {
     <div className="w-[280px] h-full border-r border-gray-100 bg-white flex flex-col shadow-sm z-10">
       <div className="p-6 pb-2">
         <div className="flex items-center gap-2 mb-6">
-          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg">
-            <MdStart className="w-5 h-5" />
+          <div
+            onClick={() => router.back()}
+            className="w-8 h-8 cursor-pointer rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center text-white font-bold text-lg"
+          >
+            <MdStart className="w-5 h-5 rotate-180" />
           </div>
           <span className="font-bold text-lg text-slate-800 tracking-tight">
             Flow Builder

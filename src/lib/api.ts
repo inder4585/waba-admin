@@ -1,8 +1,5 @@
 import axios from 'axios';
-
-// Base URL as requested: localhost:3000
-// In production, this should be an environment variable.
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL + '/api';
 
 export const api = axios.create({
   baseURL: BASE_URL,
@@ -11,8 +8,6 @@ export const api = axios.create({
   },
 });
 
-// Add a request interceptor to attach token if needed (assuming "AUTH" implies some token)
-// For now, simple implementation.
 api.interceptors.request.use(
   (config) => {
     const token = localStorage?.getItem('token') ?? null;

@@ -11,8 +11,7 @@ const TemplateNodeComponent = ({
   const language = data.payload?.language || 'en_US';
 
   return (
-    <div className="shadow-lg rounded-2xl bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 min-w-[280px] overflow-visible transition-all hover:shadow-xl hover:scale-[1.02]">
-      {/* Header */}
+    <div className="shadow-lg rounded-2xl bg-white border border-gray-100 min-w-[280px] overflow-visible transition-all hover:shadow-xl hover:scale-[1.02]">
       <div className="bg-gradient-to-r from-emerald-500 to-teal-600 px-4 py-3 flex items-center justify-between rounded-t-2xl">
         <div className="flex items-center gap-2 text-white">
           <MdOutlineDashboardCustomize className="w-5 h-5 drop-shadow-sm" />
@@ -23,49 +22,43 @@ const TemplateNodeComponent = ({
       </div>
 
       <div className="p-5 space-y-4">
-        {/* Template Info */}
-        <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+        <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-gray-400">
           <span>
             Name:{' '}
-            <span className="text-emerald-600 dark:text-emerald-400 font-mono">
-              {templateName}
-            </span>
+            <span className="text-emerald-600 font-mono">{templateName}</span>
           </span>
-          <span className="bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-100 dark:border-emerald-800/50">
+          <span className="bg-emerald-50 text-emerald-600 px-2 py-0.5 rounded-full border border-emerald-100">
             {language}
           </span>
         </div>
 
-        {/* Template Content Preview */}
-        <div className="bg-slate-50 dark:bg-slate-900/50 rounded-xl p-4 border border-slate-100 dark:border-slate-700 shadow-inner relative">
+        <div className="bg-slate-50 rounded-xl p-4 border border-slate-100 shadow-inner relative">
           <div className="space-y-2 opacity-60">
-            <div className="h-2 w-3/4 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
-            <div className="h-2 w-full bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
-            <div className="h-2 w-1/2 bg-slate-200 dark:bg-slate-700 rounded animate-pulse"></div>
+            <div className="h-2 w-3/4 bg-slate-200 rounded animate-pulse"></div>
+            <div className="h-2 w-full bg-slate-200 rounded animate-pulse"></div>
+            <div className="h-2 w-1/2 bg-slate-200 rounded animate-pulse"></div>
           </div>
 
           <div className="mt-4 flex flex-col gap-2">
-            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-400 dark:text-slate-500 text-[10px] font-bold py-2 rounded-lg text-center shadow-sm">
+            <div className="bg-white border border-slate-200 text-slate-400 text-[10px] font-bold py-2 rounded-lg text-center shadow-sm">
               VIEW BUTTONS
             </div>
           </div>
 
-          {/* Connection Handles */}
           <div className="absolute -right-5 top-1/2 -translate-y-1/2 flex flex-col gap-4">
             <Handle
               type="source"
               position={Position.Right}
               id="next"
               isConnectable={isConnectable}
-              className="w-3 h-3 bg-emerald-400 border-2 border-white dark:border-slate-800 hover:scale-125 transition-transform"
+              className="w-3 h-3 bg-emerald-400 border-2 border-white hover:scale-125 transition-transform"
             />
           </div>
         </div>
 
-        {/* Footer info */}
-        <div className="pt-2 border-t border-dashed border-gray-100 dark:border-slate-700 flex items-center gap-2">
+        <div className="pt-2 border-t border-dashed border-gray-100 flex items-center gap-2">
           <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-          <span className="text-[10px] text-gray-400 dark:text-gray-500 font-semibold italic">
+          <span className="text-[10px] text-gray-400 font-semibold italic">
             Template Approved
           </span>
         </div>
@@ -75,7 +68,7 @@ const TemplateNodeComponent = ({
         type="target"
         position={Position.Left}
         isConnectable={isConnectable}
-        className="w-3 h-3 bg-gray-400 border-2 border-white dark:border-slate-800 !-left-1.5 transition-colors hover:bg-emerald-500"
+        className="w-3 h-3 bg-gray-400 border-2 border-white !-left-1.5 transition-colors hover:bg-emerald-500"
       />
     </div>
   );

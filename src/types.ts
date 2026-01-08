@@ -97,6 +97,8 @@ export interface CTAButtonNodeData extends BaseNodeData {
     headerText?: string;
     footerText?: string;
     saveAs: string;
+    mediaUrl: string;
+    mediaType: string;
   };
 }
 

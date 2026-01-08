@@ -1,4 +1,5 @@
 import { api } from '@/lib/api';
+import { API_CONTENT } from '@/utils/api_content';
 
 export interface CreateWabaGroupDto {
   name: string;
@@ -17,13 +18,15 @@ export interface WabaGroup {
 }
 
 export const wabaGroupService = {
-  getAll: async () => {
-    const response = await api.get('/waba-group?sortBy=createdAt');
+  getAll: async (params?: { page: number; limit: number; userId: string }) => {
+    const endpoint = API_CONTENT.api.waba_group || '/waba-group';
+    const response = await api.get(`${endpoint}?sortBy=createdAt`, { params });
     return response.data;
   },
 
   create: async (data: CreateWabaGroupDto) => {
-    const response = await api.post('/waba-group', data);
+    const endpoint = API_CONTENT.api.waba_group || '/waba-group';
+    const response = await api.post(endpoint, data);
     return response.data;
   },
 

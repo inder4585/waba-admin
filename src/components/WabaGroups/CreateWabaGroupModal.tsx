@@ -15,14 +15,14 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { wabaGroupService } from '@/services/wabaGroupService';
+import { useSession } from 'next-auth/react';
 
 export default function CreateWabaGroupModal() {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-
-  // Using userId from prompt or fallback
-  const userId = '27601c68-8df0-454a-8d90-76a3d5b44fb0';
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
 
   const queryClient = useQueryClient();
 
@@ -45,6 +45,9 @@ export default function CreateWabaGroupModal() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!userId) {
+      return;
+    }
     mutation.mutate({ name, userId });
   };
 
